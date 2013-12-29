@@ -50,7 +50,7 @@ put '/rabbits/:id' do
 end 
 
 # delete rabbit confirmation 
-get '/rabbits/delete/id' do 
+get '/rabbits/delete/:id' do 
 	@rabbit = Rabbit.get(params[:id])
 	haml :delete 
 end 
@@ -58,7 +58,7 @@ end
 # delete rabbit 
 delete '/rabbits/:id' do 
 	Rabbit.get(params[:id]).destroy
-	reditect '/rabbits'
+	redirect '/rabbits'
 end 
 
 # show rabbit 
