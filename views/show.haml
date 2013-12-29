@@ -1,0 +1,9 @@
+%h3 = @rabbit.name 
+%p Color: #{rabbit.color}
+%p Age: #{@rabbit.age}
+%p Description: #{rabbit.description}
+%p Created at: #{rabbit.created_at}
+%p Last updated at: #{rabbit.updated_at}
+%a(href="/rabbits/edit/#{@rabbit.id}")EDIT 
+%a(href="/rabbits/delete/#{@rabbit.id}")DELETE
+%a(href='/rabbits') Back to index 

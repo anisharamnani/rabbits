@@ -1,0 +1,8 @@
+/ new
+= haml :errors, :layout => false 
+%form(action="/rabbits" method="POST")
+  %fieldset 
+    %legend Create a new rabbit 
+    = haml :form, :layout => false 
+  %input(type="submit" value="Create") or <a href='/rabbits'> cancel </a>
+  
