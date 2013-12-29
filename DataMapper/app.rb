@@ -1,10 +1,11 @@
 # App.rb
 
-Bundler.require
 require 'bundler'
+Bundler.require
 require './lib/rabbit'
 
-DataMapper.setup(:default, ENV['DATABASE_URL']) ||  "sqlite3://#{Dir.pwd}/rabbits.db")
+DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/rabbits.db")
+
 
 # list all rabbits 
 get '/rabbits' do
@@ -19,13 +20,13 @@ get '/rabbits/new' do
 end 
 
 # create a new rabbit 
-post '/rabbits/new' do 
+post '/rabbits' do 
 	@rabbit = Rabbit.new(params[:rabbit])
 	if @rabbit.save 
-		status 201 
+		status 201 #Created (p.s. thanks nikki for these notes!)
 		redirect '/rabbits/' + @rabbit.id.to_s
 	else 
-		status 400 
+		status 400 #Bad Request 
 		haml :new 
 	end 
 end 
@@ -51,7 +52,13 @@ end
 # delete rabbit confirmation 
 get '/rabbits/delete/id' do 
 	@rabbit = Rabbit.get(params[:id])
-git 	haml :delete 
+	haml :delete 
+end 
+
+# delete rabbit 
+delete '/rabbits/:id' do 
+	Rabbit.get(params[:id]).destroy
+	reditect '/rabbits'
 end 
 
 # show rabbit 

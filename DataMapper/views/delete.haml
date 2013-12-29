@@ -1,0 +1,4 @@
+%h3 Are you sure you want to delete #{@rabbit.name}?
+%form(action=/rabbits/#{@rabbit.id} method="POST")
+	%input(type="hidden" name="_method" value="DELETE")
+	%input(type="submit" value="Delete") or <a href= "/rabbits"> Cancel </a>
