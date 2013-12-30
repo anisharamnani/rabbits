@@ -1,0 +1,8 @@
+/ edit 
+= haml :errors, :layout => false 
+%form(action= "/rabbits/#{@rabbit.id}" method = "POST")
+  %input(type="hidden" name="_method" value="PUT")
+  %fieldset 
+    %legend Update this rabbit 
+    = haml :form, :layout => false 
+  %input(type="submit" value="Update") or <a href= '/rabbits'> cancel </a>
