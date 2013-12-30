@@ -9,7 +9,7 @@ class App < Sinatra::Application
 
 	# list all rabbits 
 	get '/rabbits' do
-		@rabbits = Rabbit.all 
+		@rabbits = Rabbit.order("created_at DESC")
 		haml :index  
 	end 
 
@@ -33,13 +33,13 @@ class App < Sinatra::Application
 
 	# edit rabbit 
 	get '/rabbits/edit/:id' do 
-		@rabbit = Rabbit.get(params[:id])
+		@rabbit = Rabbit.find(params[:id])
 		haml :edit 
 	end 
 
 	# update rabbit 
 	put '/rabbits/:id' do 
-		@rabbit = Rabbit.get(params[:id])
+		@rabbit = Rabbit.find(params[:id])
 		if @rabbit.update(params[:id])
 			status 201
 			redirect '/rabbits/' + params[:id]
@@ -51,19 +51,19 @@ class App < Sinatra::Application
 
 	# delete rabbit confirmation 
 	get '/rabbits/delete/:id' do 
-		@rabbit = Rabbit.get(params[:id])
+		@rabbit = Rabbit.find(params[:id])
 		haml :delete 
 	end 
 
 	# delete rabbit 
 	delete '/rabbits/:id' do 
-		Rabbit.get(params[:id]).destroy
+		Rabbit.find(params[:id]).destroy
 		redirect '/rabbits'
 	end 
 
 	# show rabbit 
 	get '/rabbits/:id' do 
-		@rabbit = Rabbit.get(params[:id])
+		@rabbit = Rabbit.find(params[:id])
 		haml :show 
 	end 
 
